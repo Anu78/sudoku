@@ -1,4 +1,4 @@
-function resetBoard(board) {
+export function resetBoard(board) {
   // Reset the board to the initial state
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
@@ -15,7 +15,7 @@ class Cell {
   }
 }
 
-function validBoard(board) {
+export function validBoard(board) {
   class error {
     constructor(type, index) {
       this.type = type;
@@ -65,12 +65,6 @@ function validBoard(board) {
   return true; // if no checks failed
 }
 
-function printBoard(board) {
-  for (let row of board) {
-    console.log(row.join(" ")); // Use a space as the separator
-  }
-}
-
 function invertSet(originalSet) {
   const invertedSet = new Set([...Array(9)].map((_, i) => i + 1));
 
@@ -81,7 +75,7 @@ function invertSet(originalSet) {
   return invertedSet;
 }
 
-function possible(x, y) {
+function possible(x, y, board) {
   // get elements in row
   let rowSet = new Set(board[x].filter((num) => num !== 0));
 
@@ -105,7 +99,7 @@ function possible(x, y) {
   return invertSet(finalSet);
 }
 
-function evalBoardState() {
+function evalBoardState(board) {
   let possibleValues = []
     for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
@@ -113,7 +107,7 @@ function evalBoardState() {
 
       if (num !== 0) continue;
 
-      const values = possible(i, j);
+      const values = possible(i, j, board);
       possibleValues.push(new Cell([i, j], values));
     }
   }
@@ -123,8 +117,8 @@ function evalBoardState() {
   return possibleValues
 }
 
-function solveBoard(board) {
-    let possibleValues = evalBoardState() // evaluate all cells on the board
+export function solveBoard(board) {
+    let possibleValues = evalBoardState(board) // evaluate all cells on the board
 
     if (possibleValues.length === 0) return board // no solution
 
@@ -142,15 +136,3 @@ function solveBoard(board) {
     }
     possibleValues.unshift(cell)
 }
-
-const board = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-  [0, 0, 0, 0, 0, 0, 0, 0, 0], 
-]

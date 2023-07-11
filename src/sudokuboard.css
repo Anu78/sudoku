@@ -19,6 +19,9 @@ input[type=number] {
     font-size: 2rem;
 }
 
+/* highlight the 3x3 grids in the table */
+
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
