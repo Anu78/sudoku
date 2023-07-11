@@ -2,12 +2,12 @@ import "./sudokuboard.css";
 
 const SudokuBoard = ({ board, setBoard }) => {
   const handleChange = (e, row, col) => {
-    const newValue = e.target.value
+    let newValue = e.target.value
 
     if (newValue.length > 1) return
-    
+    if (newValue === "") newValue = 0
     const newBoard = [...board]
-    newBoard[row][col] = newValue
+    newBoard[row][col] = parseInt(newValue,10)
     setBoard(newBoard)
   }
 
