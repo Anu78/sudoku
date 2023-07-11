@@ -1,97 +1,31 @@
-
 import "./styles.css";
+import { useState } from "react";
+import Options from "./Options";
+import SudokuBoard from "./SudokuBoard";
 
 export default function App() {
-  
+  const [board, setBoard] = useState([
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ]);
+
   return (
     <div className="container">
       <div id="leftThird" className="thirds">
-        <h1 className="top-heading">Options</h1>
+        {/* options div */}
+        <Options />
       </div>
+
       <div id="midThird" className="thirds">
-          <div id="sudoku-board">
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-            <div className="grid-item"><input type="number" /></div>
-          </div>
+        {/* sudoku board div */}
+          <SudokuBoard board={board} setBoard={setBoard} />
       </div>
       <div id="rightThird" className="thirds">
         {/* timer div */}

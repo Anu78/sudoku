@@ -6,6 +6,22 @@
     --flex-mid: 40%;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+
+input[type="number"] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 2rem;
+    text-align: center;
+    outline: 0;
+
+}
+
 .container {
     display: flex;
     height: 100vh;
@@ -29,51 +45,4 @@
 #rightThird {
     flex: var(--flex-edges);
     border-left: 2px solid cadetblue;
-}
-
-#sudoku-board {
-    width: var(--sudoku-board-size);
-    height: var(--sudoku-board-size);
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
-}
-
-input[type=number] {
-    border: 1px solid black;
-    background-color: none;
-    outline: 0;
-    width:100%;
-    height:100%;
-    padding: 0;
-    text-align: center;  
-    font-size: 2rem;
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-#sudoku-board :nth-child(3n):not(:nth-child(9n)) {
-    border-right: var(--sudoku-thick-border) solid grey;
-}
-
-#sudoku-board :nth-child(-n+27):nth-child(n+19) {
-    border-bottom: var(--sudoku-thick-border) solid grey;
-}
-
-#sudoku-board :nth-child(-n+54):nth-child(n+46) {
-    border-bottom: var(--sudoku-thick-border) solid grey;
-}
-
-#sudoku-board :nth-child(-n+27):nth-child(n+19) {
-    border-bottom: var(--sudoku-thick-border) solid grey;
 }
