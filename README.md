@@ -4,11 +4,7 @@
 This react app aims to create an elegant and minimal sudoku solver that people can use to play the game and learn about solving strategies (in the future). This sudoku app is a part of a bigger project involving more similarly styled games.
 
 ### Getting Started
-## Bing
 
-Sure, I can try to write that for you. Here is a possible "getting started" section for your readme file:
-
-# Getting started
 
 To run this app, you will need to have [npm](https://www.npmjs.com/) and [node](https://nodejs.org/en/) installed on your machine. You can check if you have them by running the following commands in your terminal:
 
