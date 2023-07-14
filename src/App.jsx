@@ -1,7 +1,7 @@
-import "./styles.css";
+import "./App.css";
 import { useState } from "react";
-import Options from "./Options";
-import SudokuBoard from "./SudokuBoard";
+import Options from "./options/Options";
+import SudokuBoard from "./sudokuboard/SudokuBoard";
 
 export default function App() {
   const [board, setBoard] = useState([
@@ -25,7 +25,7 @@ export default function App() {
 
       <div id="midThird" className="thirds">
         {/* sudoku board div */}
-          <SudokuBoard board={board} setBoard={setBoard} />
+        <SudokuBoard board={board} setBoard={setBoard} />
       </div>
       <div id="rightThird" className="thirds">
         {/* timer div */}

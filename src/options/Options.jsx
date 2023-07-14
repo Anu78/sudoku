@@ -1,5 +1,5 @@
 import "./options.css";
-import { solveBoard } from "./Sudoku.js";
+import { solveBoard } from "../Sudoku.js";
 
 const Options = ({ board, setBoard }) => {
   function solve() {
