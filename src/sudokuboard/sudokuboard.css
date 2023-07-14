@@ -5,13 +5,17 @@
 #sudoku-board {
     justify-content: center;
     aspect-ratio: 1/1;
-    margin: 0 auto;
+    margin: 0;
+    overflow: none;
+    display: flex;
+    align-items: center;
+    max-width: 55vh;
 }
 
 input[type=number] {
     background-color: none;
     outline: 0;
-    width: 100%;
+    width: 95%;
     height: 100%;
     text-align: center;
     font-size: 2rem;

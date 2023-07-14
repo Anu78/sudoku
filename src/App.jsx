@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Options from "./options/Options";
 import SudokuBoard from "./sudokuboard/SudokuBoard";
 

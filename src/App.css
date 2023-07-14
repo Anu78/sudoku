@@ -30,9 +30,9 @@ input[type="number"] {
 #leftThird {
     flex-basis: var(--flex-edges);
     display: flex;
-    border-right: 2px solid cadetblue;
     justify-content: center;
     padding: 1%;
+    flex-direction: column;
 }
 
 #midThird {
@@ -44,5 +44,9 @@ input[type="number"] {
 
 #rightThird {
     flex: var(--flex-edges);
-    border-left: 2px solid cadetblue;
+}
+
+.thirds {
+    float: left;
+    box-sizing: border-box;
 }

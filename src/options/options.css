@@ -1,0 +1,19 @@
+#opt-heading {
+    flex-basis: 10%;
+}
+
+#opt-form {
+    flex-basis: 70%;
+}
+
+#opt-solve {
+    flex-basis: 20%;
+}
+
+#opt-sub-heading {
+    padding-top: 1%;
+}
+
+.buttons {
+    font-size: 2rem;
+}

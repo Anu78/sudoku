@@ -5,6 +5,8 @@ export function resetBoard(board) {
       board[i][j] = 0;
     }
   }
+
+  return board
 }
 
 class Cell {
