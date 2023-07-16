@@ -47,11 +47,13 @@ This will also serve the app on port 3000, but it will watch for changes in your
 That's it! You are ready to use the app. Enjoy! 😊
 
 ### Todo
-- [] Dark mode css + row/col/grid highlight and auto switching
+- [x] Dark mode css + row/col/grid highlight and auto switching
+- [x] Custom toast notifications
 - [] Error handling/return in solve function
-- [] Custom toast notifications
 - [] Finish options form / extra customization
 - [] Add timer and user solving
+- [] Generate puzzles for user to solve
+- [] Zen mode
 
 ### Contributing
 We welcome contributions from anyone who wants to improve this app. Here are some guidelines on how to contribute:

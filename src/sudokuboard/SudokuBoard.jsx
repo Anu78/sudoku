@@ -1,6 +1,9 @@
 import "./sudokuboard.css";
+import { useState } from "react";
 
 const SudokuBoard = ({ board, setBoard }) => {
+  const [focusedCell, setFocusedCell] = useState({ row: null, col: null });
+
   const handleChange = (e, row, col) => {
     let newValue = e.target.value;
 
@@ -11,19 +14,43 @@ const SudokuBoard = ({ board, setBoard }) => {
     setBoard(newBoard);
   };
 
+  const handleFocus = (row, col) => {
+    setFocusedCell({ row, col });
+  };
+
+  const shouldHighlight = (row, col) => {
+    if (focusedCell.row === null || focusedCell.col === null) {
+      return false;
+    }
+
+    // Check if in the same row or column
+    if (focusedCell.row === row || focusedCell.col === col) {
+      return true;
+    }
+
+    // Check if in the same 3x3 box
+    const startRow = Math.floor(focusedCell.row / 3) * 3;
+    const startCol = Math.floor(focusedCell.col / 3) * 3;
+
+    return (
+      row >= startRow &&
+      row < startRow + 3 &&
+      col >= startCol &&
+      col < startCol + 3
+    );
+  };
+
   return (
     <form id="sudoku-board">
       <table>
         <tbody>
           {board.map((row, rowIndex) => (
-            <tr
-              id={"row" + (rowIndex + 1)}
-              className="table-row"
-              key={rowIndex}
-            >
+            <tr id={"row" + rowIndex} className="table-row" key={rowIndex}>
               {row.map((cellValue, columnIndex) => (
                 <td
-                  className={("table-cell", "col" + (columnIndex + 1))}
+                  className={`table-cell col${columnIndex} ${
+                    shouldHighlight(rowIndex, columnIndex) ? "highlight" : ""
+                  }`}
                   key={columnIndex}
                 >
                   <input
@@ -32,6 +59,8 @@ const SudokuBoard = ({ board, setBoard }) => {
                     max={9}
                     value={cellValue || ""}
                     onChange={(e) => handleChange(e, rowIndex, columnIndex)}
+                    onFocus={() => handleFocus(rowIndex, columnIndex)}
+                    onBlur={() => setFocusedCell({ row: null, col: null })}
                   />
                 </td>
               ))}

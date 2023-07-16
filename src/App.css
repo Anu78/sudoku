@@ -4,27 +4,15 @@
     --sudoku-thick-border: 4px;
     --flex-edges: 30%;
     --flex-mid: 40%;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    height: 100%;
-}
-
-input[type="number"] {
-    width: 100%;
-    height: 100%;
-    border: none;
-    font-size: 2rem;
-    text-align: center;
-    outline: 0;
-
+    --background: #e6ddd6;
+    --text: #000000;
 }
 
 .container {
     display: flex;
     height: 100vh;
+    background-color: var(--background);
+    color: var(--text);
 }
 
 #leftThird {
@@ -49,4 +37,12 @@ input[type="number"] {
 .thirds {
     float: left;
     box-sizing: border-box;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+    --background: #1d1b1a;
+    --text: #ffffff;
+    }
 }

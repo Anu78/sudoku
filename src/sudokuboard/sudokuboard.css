@@ -1,41 +1,75 @@
 :root {
-    --sudoku-thick-border: 4px;
+    --sudoku-thick-border: 2px;
+    --table-width: 60vh;
+    --board-color: #d3d0cd;
+    --highlight: rgba(255, 215, 102, 0.8);
+    --border-color: #dc8c4c;
+    --text-color: #000000;
 }
 
-#sudoku-board {
-    justify-content: center;
-    aspect-ratio: 1/1;
-    margin: 0;
-    overflow: none;
-    display: flex;
-    align-items: center;
-    max-width: 55vh;
+table {
+    width: var(--table-width);
+    height: var(--table-width);
+    border-collapse: collapse;
+    margin: auto;
 }
 
-input[type=number] {
-    background-color: none;
-    outline: 0;
-    width: 95%;
+td {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 0;
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+@keyframes blink {
+    0% {
+        background-color: var(--highlight-off);
+    }
+
+    /* Start with transparent background */
+    50% {
+        background-color: rgba(255, 215, 102, 1);
+    }
+
+    /* Fade-in to fully opaque */
+    100% {
+        background-color: rgba(255, 215, 102, 0.4);
+    }
+
+    /* Fade-out to transparent again */
+}
+
+td input[type=number] {
+    width: 100%;
     height: 100%;
+    border: none;
+    padding: 0;
     text-align: center;
-    font-size: 2rem;
-    border: 2px solid black;
+    font-size: 2em;
+    outline: none;
+    box-sizing: border-box;
+    font-weight: 300;
+    background-color: var(--board-color);
+    color: var(--text-color);
 }
+
 
 tr:nth-child(3n+1):not(:first-child) td input {
-    border-top: 4px solid black;
+    border-top: var(--sudoku-thick-border) solid var(--border-color);
 }
 
-tr:nth-child(3n):not(:first-child) td input {
-    border-bottom: 4x solid black;
+tr:nth-child(3n):not(:last-child) td input {
+    border-bottom: var(--sudoku-thick-border) solid var(--border-color);
 }
 
-td:nth-child(3n+1):not(:first-child):not(:last-child) input {
-    border-left: 4px solid black;
+td:nth-child(3n+1):not(:first-child) input {
+    border-left: var(--sudoku-thick-border) solid var(--border-color);
 }
 
-td:nth-child(3n):not(:first-child):not(:last-child) input {
-    border-right: 4px solid black;
+td:nth-child(3n):not(:last-child) input {
+    border-right: var(--sudoku-thick-border) solid var(--border-color);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -48,4 +82,24 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* #row1 input {
+    background: rgba(123, 179, 209, 0.8)
+} store the highlight color */
+
+td.highlight input[type=number] {
+    background-color: var(--highlight);
+    /* animation: blink 1s infinite; */
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --board-color: #3a3734;
+        --highlight: rgba(128, 108, 51, 0.8);
+        --border-color: #a2938b;
+        --text-color: #F0EAD6;
+    }
 }
