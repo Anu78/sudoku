@@ -3,8 +3,8 @@ import { resetBoard, solveBoard } from "../Sudoku.js";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 
-const Options = ({ board, setBoard }) => {
-  
+const Options = ({ board, setBoard, isSolving, setisSolving }) => {
+
   const resetBtn = {
     "--c": "#E95A49",
   }
@@ -28,13 +28,29 @@ const Options = ({ board, setBoard }) => {
           break;
       }
   }
-  
-  function solve() {
-    const solvedBoard = solveBoard(board);
-    const newBoard = [...solvedBoard];
+
+  function midUpdateBoard(board){
+    const newBoard = [...board];
+
     setBoard(newBoard);
-    // eventually we write to handle errors from solve function and choose toast
-    generateToast("success", "The board was solved!")
+  }
+  
+  async function solve() {
+    setisSolving(true);
+
+    // Use try-catch block to handle errors
+    try {
+      const solvedBoard = await solveBoard(board, midUpdateBoard);
+      const newBoard = [...solvedBoard];
+      setBoard(newBoard);
+      generateToast("success", "The board was solved!");
+    } catch (error) {
+      // Handle any errors from solveBoard
+      console.error(error);
+      generateToast("error", "An error occurred while solving the board");
+    }
+
+    setisSolving(false);
   }
 
   function reset(){
@@ -54,10 +70,10 @@ const Options = ({ board, setBoard }) => {
         <p>This is a lot of sample text written to test theme colors.</p>
       </div>
       <div id="opt-solve" className="option-thirds">
-        <button style={resetBtn} onClick={reset} id="reset-btn" className="buttons">
+        <button disabled={isSolving} style={resetBtn} onClick={reset} id="reset-btn" className="buttons">
           Reset
         </button>
-        <button onClick={solve} id="solve-btn" className="buttons">
+        <button disabled={isSolving} onClick={solve} id="solve-btn" className="buttons">
           Solve
         </button>
       </div>

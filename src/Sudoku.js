@@ -6,7 +6,7 @@ export function resetBoard(board) {
     }
   }
 
-  return board
+  return board;
 }
 
 class Cell {
@@ -102,8 +102,8 @@ function possible(x, y, board) {
 }
 
 function evalBoardState(board) {
-  let possibleValues = []
-    for (let i = 0; i < board.length; i++) {
+  let possibleValues = [];
+  for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       const num = board[i][j];
 
@@ -116,25 +116,34 @@ function evalBoardState(board) {
 
   possibleValues.sort((a, b) => a.possibilites - b.possibilites);
 
-  return possibleValues
+  return possibleValues;
 }
 
-export function solveBoard(board) {
-    let possibleValues = evalBoardState(board) // evaluate all cells on the board
+async function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-    if (possibleValues.length === 0) return board // no solution
+export async function solveBoard(board, boardCallback) {
+  let possibleValues = evalBoardState(board);
+  let ms = 230;
 
-    const cell = possibleValues.shift()
+  if (possibleValues.length === 0)
+    return board; // no solution
 
-    const [row,col] = cell.index
+  const cell = possibleValues.shift();
 
-    for(let num of cell.valueSet){
-        board[row][col] = num
-        const result = solveBoard(board)
-        if (result) {
-            return result
-        }
-        board[row][col] = 0
+  const [row, col] = cell.index;
+
+  for (let num of cell.valueSet) {
+    await delay(ms)
+    board[row][col] = num;
+    boardCallback(board);
+    const result = solveBoard(board, boardCallback);
+    if (result) {
+      return result;
     }
-    possibleValues.unshift(cell)
+    board[row][col] = 0;
+    boardCallback(board);
+  }
+  possibleValues.unshift(cell);
 }

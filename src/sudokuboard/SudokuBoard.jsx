@@ -1,10 +1,11 @@
 import "./sudokuboard.css";
 import { useState } from "react";
 
-const SudokuBoard = ({ board, setBoard }) => {
+const SudokuBoard = ({ board, setBoard, isSolving }) => {
   const [focusedCell, setFocusedCell] = useState({ row: null, col: null });
 
   const handleChange = (e, row, col) => {
+    if (isSolving) return;
     let newValue = e.target.value;
 
     if (newValue.length > 1) return;
