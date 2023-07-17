@@ -125,7 +125,7 @@ async function delay(ms) {
 
 export async function solveBoard(board, boardCallback) {
   let possibleValues = evalBoardState(board);
-  let ms = 230;
+  let ms = 180;
 
   if (possibleValues.length === 0)
     return board; // no solution
@@ -147,3 +147,4 @@ export async function solveBoard(board, boardCallback) {
   }
   possibleValues.unshift(cell);
 }
+
