@@ -18,7 +18,6 @@ export default function App() {
 
   const [isSolving, setisSolving] = useState(false);
 
-
   return (
     <div className="container">
       <div id="leftThird" className="thirds">

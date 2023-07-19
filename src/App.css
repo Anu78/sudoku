@@ -1,48 +1,47 @@
 :root {
-    --sudoku-board-size: 65vh;
-    --grid-item-dim: calc(var(--sudoku-board-size) / 9);
-    --sudoku-thick-border: 4px;
-    --flex-edges: 30%;
-    --flex-mid: 40%;
-    --background: #e6ddd6;
-    --text: #000000;
+  --sudoku-board-size: 65vh;
+  --grid-item-dim: calc(var(--sudoku-board-size) / 9);
+  --sudoku-thick-border: 4px;
+  --flex-edges: 30%;
+  --flex-mid: 40%;
+  --background: #e6ddd6;
+  --text: #000000;
 }
 
 .container {
-    display: flex;
-    height: 100vh;
-    background-color: var(--background);
-    color: var(--text);
+  display: flex;
+  height: 100vh;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 #leftThird {
-    flex-basis: var(--flex-edges);
-    display: flex;
-    justify-content: center;
-    padding: 1%;
-    flex-direction: column;
+  flex-basis: var(--flex-edges);
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+  flex-direction: column;
 }
 
 #midThird {
-    flex: var(--flex-mid);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex: var(--flex-mid);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #rightThird {
-    flex: var(--flex-edges);
+  flex: var(--flex-edges);
 }
 
 .thirds {
-    float: left;
-    box-sizing: border-box;
+  float: left;
+  box-sizing: border-box;
 }
 
-
 @media (prefers-color-scheme: dark) {
-    :root {
+  :root {
     --background: #1d1b1a;
     --text: #ffffff;
-    }
+  }
 }

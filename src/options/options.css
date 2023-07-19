@@ -1,70 +1,68 @@
 :root {
-    --text-color: #000000;
+  --text-color: #000000;
 }
 
 * {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
 #opt-heading {
-    flex-basis: 10%;
+  flex-basis: 10%;
 }
 
 #opt-form {
-    flex-basis: 70%;
+  flex-basis: 70%;
 }
 
 #opt-solve {
-    flex-basis: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  flex-basis: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #opt-sub-heading {
-    padding-top: 1%;
+  padding-top: 1%;
 }
 
 #solve-btn {
-    margin-left: 7.5%;
+  margin-left: 7.5%;
 }
 
 #reset-btn {
-    margin-right: 7.5%;
+  margin-right: 7.5%;
 }
 
 .buttons {
-    --c: #229091;
-    /* the color*/;
-    width: 15vh;
-    box-shadow: 0 0 0 .1em inset var(--c);
-    --_g: linear-gradient(var(--c) 0 0) no-repeat;
-    background:
-        var(--_g) calc(var(--_p, 0%) - 100%) 0%,
-        var(--_g) calc(200% - var(--_p, 0%)) 0%,
-        var(--_g) calc(var(--_p, 0%) - 100%) 100%,
-        var(--_g) calc(200% - var(--_p, 0%)) 100%;
-    background-size: 50.5% calc(var(--_p, 0%)/2 + .5%);
-    outline-offset: .1em;
-    transition: background-size .4s, background-position 0s .4s;
-    font-size: 1.5em;
+  --c: #229091;
+  /* the color*/
+  width: 15vh;
+  box-shadow: 0 0 0 0.1em inset var(--c);
+  --_g: linear-gradient(var(--c) 0 0) no-repeat;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
+  font-size: 1.5em;
 }
 
 .buttons:hover {
-    --_p: 100%;
-    transition: background-position .4s, background-size 0s;
-    cursor: pointer;
+  --_p: 100%;
+  transition: background-position 0.4s, background-size 0s;
+  cursor: pointer;
 }
 
 .buttons:active {
-    box-shadow: 0 0 9e9q inset #0009;
-    background-color: var(--c);
-    color: #fff;
+  box-shadow: 0 0 9e9Q inset #0009;
+  background-color: var(--c);
+  color: #fff;
 }
 
-
 @media (prefers-color-scheme: dark) {
-    :root {
-        --text-color: #F0EAD6;
-    }
+  :root {
+    --text-color: #f0ead6;
+  }
 }

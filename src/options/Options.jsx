@@ -1,40 +1,39 @@
 import "./options.css";
 import { resetBoard, solveBoard } from "../Sudoku.js";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'
+import "react-toastify/dist/ReactToastify.css";
 
 const Options = ({ board, setBoard, isSolving, setisSolving }) => {
-
   const resetBtn = {
     "--c": "#E95A49",
+  };
+
+  function generateToast(type, msg) {
+    switch (type) {
+      case "error":
+        toast.error(msg, {});
+        break;
+      case "info":
+        toast.info(msg, {});
+        break;
+      case "success":
+        toast.success(msg, {});
+        break;
+      case "promise":
+        // yet to be seen how we implement this
+        break;
+      case "default":
+        console.log("invalid toast type for generateToast function");
+        break;
+    }
   }
 
-  function generateToast(type, msg){
-      switch(type){
-        case "error":
-          toast.error(msg, {})
-          break;
-        case "info":
-          toast.info(msg, {});
-          break;
-        case "success":
-          toast.success(msg, {});
-          break;
-        case "promise":
-          // yet to be seen how we implement this
-          break;
-        case "default":
-          console.log("invalid toast type for generateToast function")
-          break;
-      }
-  }
-
-  function midUpdateBoard(board){
+  function midUpdateBoard(board) {
     const newBoard = [...board];
 
     setBoard(newBoard);
   }
-  
+
   async function solve() {
     setisSolving(true);
 
@@ -53,11 +52,11 @@ const Options = ({ board, setBoard, isSolving, setisSolving }) => {
     setisSolving(false);
   }
 
-  function reset(){
-    const zeroBoard = resetBoard(board)
+  function reset() {
+    const zeroBoard = resetBoard(board);
     setBoard([...zeroBoard]);
-    
-    generateToast("info", "The board was reset!")
+
+    generateToast("info", "The board was reset!");
   }
 
   return (
@@ -70,10 +69,21 @@ const Options = ({ board, setBoard, isSolving, setisSolving }) => {
         <p>This is a lot of sample text written to test theme colors.</p>
       </div>
       <div id="opt-solve" className="option-thirds">
-        <button disabled={isSolving} style={resetBtn} onClick={reset} id="reset-btn" className="buttons">
+        <button
+          disabled={isSolving}
+          style={resetBtn}
+          onClick={reset}
+          id="reset-btn"
+          className="buttons"
+        >
           Reset
         </button>
-        <button disabled={isSolving} onClick={solve} id="solve-btn" className="buttons">
+        <button
+          disabled={isSolving}
+          onClick={solve}
+          id="solve-btn"
+          className="buttons"
+        >
           Solve
         </button>
       </div>

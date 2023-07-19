@@ -127,15 +127,14 @@ export async function solveBoard(board, boardCallback) {
   let possibleValues = evalBoardState(board);
   let ms = 180;
 
-  if (possibleValues.length === 0)
-    return board; // no solution
+  if (possibleValues.length === 0) return board; // no solution
 
   const cell = possibleValues.shift();
 
   const [row, col] = cell.index;
 
   for (let num of cell.valueSet) {
-    await delay(ms)
+    await delay(ms);
     board[row][col] = num;
     boardCallback(board);
     const result = solveBoard(board, boardCallback);
@@ -147,4 +146,3 @@ export async function solveBoard(board, boardCallback) {
   }
   possibleValues.unshift(cell);
 }
-
