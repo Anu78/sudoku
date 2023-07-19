@@ -1,5 +1,8 @@
 :root {
   --text-color: #000000;
+  --highlight: rgba(255, 215, 102, 0.8);
+  --checkbox: #795656;
+  --board-color: #d3d0cd;
 }
 
 * {
@@ -75,6 +78,9 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #f0ead6;
+    --highlight: rgba(128, 108, 51, 0.8);
+    --checkbox: #cdc3c3;
+    --border-color: #a2938b;
   }
 }
 
@@ -83,7 +89,7 @@ input[type="checkbox"] {
   appearance: none;
   width: 60px; /* Adjust the width */
   height: 30px; /* Adjust the height */
-  background: #4a4343;
+  background: var(--board-color);
   border-radius: 30px; /* Adjust the border-radius */
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -91,7 +97,7 @@ input[type="checkbox"] {
 }
 
 input:checked[type="checkbox"] {
-  background: rgb(128, 108, 51);
+  background: var(--highlight);
 }
 
 input[type="checkbox"]::after {
@@ -101,7 +107,7 @@ input[type="checkbox"]::after {
   height: 30px; /* Adjust the height */
   top: 0;
   left: 0;
-  background: #cdc3c3;
+  background: var(--checkbox);
   border-radius: 75%; /* Adjust the border-radius */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   transform: scale(0.8); /* Adjust the scale */
