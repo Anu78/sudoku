@@ -2,11 +2,20 @@ import "./options.css";
 import { resetBoard, solveBoard } from "../Sudoku.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
-const Options = ({ board, setBoard, isSolving, setisSolving }) => {
+const Options = ({ board, setBoard, isSolving, setisSolving}) => {
   const resetBtn = {
     "--c": "#E95A49",
   };
+
+  const [settings, setSettings] = useState({
+    difficulty: 50,
+    verification: false,
+    board_highlight: true,
+    zen_mode_solving: false,
+    theme: false,
+  });
 
   function generateToast(type, msg) {
     switch (type) {
@@ -65,9 +74,55 @@ const Options = ({ board, setBoard, isSolving, setisSolving }) => {
         <h1>Options</h1>
         <p id="opt-sub-heading">Update board settings below.</p>
       </div>
+
       <div id="opt-form" className="option-thirds">
-        <p>This is a lot of sample text written to test theme colors.</p>
+        <label htmlFor="zen-mode-solving">
+          <input
+            id="zen-mode-solving"
+            type="checkbox"
+            value={settings["zen-mode-solving"]}
+          />
+          Enable zen mode when solving?
+        </label>
+        <label htmlFor="disable-board-highlight">
+          <input
+            id="disable-board-highlight"
+            type="checkbox"
+            value={settings["board-highlight"]}
+          />
+          Disable board highlight?
+        </label>
+        <label htmlFor="disable-verification">
+          <input
+            id="disable-verification"
+            type="checkbox"
+            value={settings["verification"]}
+          />
+          Disable solving hints?
+          <p id="minify-verification">
+            This will disqualify you from leaderboard spots.
+          </p>
+        </label>
+        <label htmlFor="difficulty-slider">
+          <input
+            id="difficulty-slider"
+            type="range"
+            min={0}
+            max={100}
+            step={5}
+            value={settings["difficulty"]}
+            onChange={(event) => {
+              setSettings((prevState) => ({
+                ...prevState,
+                difficulty: event.target.value,
+              }));
+            }}
+          />
+          Puzzle difficulty:{" "}
+          <p id="current-difficulty">{settings["difficulty"]}</p>
+        </label>
       </div>
+
       <div id="opt-solve" className="option-thirds">
         <button
           disabled={isSolving}

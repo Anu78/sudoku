@@ -16,7 +16,8 @@ export default function App() {
     [0, 0, 0, 0, 8, 0, 0, 7, 9],
   ]);
 
-  const [isSolving, setisSolving] = useState(false);
+  const [isSolving, setisSolving] = useState(false)
+  const [zen, setZen] = useState(false)
 
   return (
     <div className="container">
@@ -27,6 +28,7 @@ export default function App() {
           setisSolving={setisSolving}
           board={board}
           setBoard={setBoard}
+          zen={zen}
         />
       </div>
 
