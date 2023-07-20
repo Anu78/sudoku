@@ -2,20 +2,14 @@ import "./options.css";
 import { resetBoard, solveBoard } from "../Sudoku.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useContext } from "react";
+import AppContext from "../AppContext";
 
-const Options = ({ board, setBoard, isSolving, setisSolving }) => {
+const Options = () => {
   const resetBtn = {
     "--c": "#E95A49",
   };
-
-  const [settings, setSettings] = useState({
-    difficulty: 50,
-    verification: false,
-    board_highlight: true,
-    zen_mode_solving: false,
-    theme: false,
-  });
+  const {isSolving, setisSolving, board, setBoard, settings, setSettings} = useContext(AppContext)
 
   function generatePuzzle() {
     alert("puzzle generated");
