@@ -3,13 +3,11 @@ import { useState, useContext } from "react";
 import AppContext from "../AppContext";
 
 const SudokuBoard = () => {
-  
   const { isSolving, board, setBoard, settings } = useContext(AppContext);
-  
+
   const [focusedCell, setFocusedCell] = useState({ row: null, col: null });
 
   const handleChange = (e, row, col) => {
-    if (isSolving) return;
     let newValue = e.target.value;
 
     if (newValue.length > 1) return;
@@ -25,7 +23,7 @@ const SudokuBoard = () => {
 
   const shouldHighlight = (row, col, board_highlight) => {
     if (!board_highlight) return false
-    
+
     if (focusedCell.row === null || focusedCell.col === null) {
       return false;
     }
@@ -54,9 +52,15 @@ const SudokuBoard = () => {
           {board.map((row, rowIndex) => (
             <tr id={"row" + rowIndex} className="table-row" key={rowIndex}>
               {row.map((cellValue, columnIndex) => (
-                <td 
-                className={`table-cell col${columnIndex} ${
-                    shouldHighlight(rowIndex, columnIndex,settings.board_highlight) ? "highlight" : ""
+                <td
+                  className={`table-cell col${columnIndex} ${
+                    shouldHighlight(
+                      rowIndex,
+                      columnIndex,
+                      settings.board_highlight
+                    )
+                      ? "highlight"
+                      : ""
                   }`}
                   key={columnIndex}
                 >
@@ -68,6 +72,7 @@ const SudokuBoard = () => {
                     onChange={(e) => handleChange(e, rowIndex, columnIndex)}
                     onFocus={() => handleFocus(rowIndex, columnIndex)}
                     onBlur={() => setFocusedCell({ row: null, col: null })}
+                    disabled={isSolving}
                   />
                 </td>
               ))}

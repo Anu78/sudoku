@@ -95,6 +95,18 @@ td.highlight input[type="number"] {
   /* animation: blink 1s infinite; */
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-solve {
+    animation: fadeIn 0.5s east-in-out;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --board-color: #3a3734;
