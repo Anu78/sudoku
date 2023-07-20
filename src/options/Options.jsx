@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
-const Options = ({ board, setBoard, isSolving, setisSolving}) => {
+const Options = ({ board, setBoard, isSolving, setisSolving }) => {
   const resetBtn = {
     "--c": "#E95A49",
   };
@@ -16,6 +16,10 @@ const Options = ({ board, setBoard, isSolving, setisSolving}) => {
     zen_mode_solving: false,
     theme: false,
   });
+
+  function generatePuzzle() {
+    alert("puzzle generated");
+  }
 
   function generateToast(type, msg) {
     switch (type) {
@@ -71,8 +75,8 @@ const Options = ({ board, setBoard, isSolving, setisSolving}) => {
   return (
     <>
       <div id="opt-heading" className="opt-thirds">
-        <h1>Options</h1>
-        <p id="opt-sub-heading">Update board settings below.</p>
+        <h1>options</h1>
+        <p id="opt-sub-heading">update board settings below.</p>
       </div>
 
       <div id="opt-form" className="option-thirds">
@@ -80,25 +84,43 @@ const Options = ({ board, setBoard, isSolving, setisSolving}) => {
           <input
             id="zen-mode-solving"
             type="checkbox"
-            value={settings["zen-mode-solving"]}
+            value={settings.zen_mode_solving}
+            onChange={() => {
+              setSettings((prevState) => ({
+                ...prevState,
+                zen_mode_solving: !prevState.zen_mode_solving,
+              }));
+            }}
           />
-          Enable zen mode when solving?
+          enable zen mode upon solve?
         </label>
         <label htmlFor="disable-board-highlight">
           <input
             id="disable-board-highlight"
             type="checkbox"
-            value={settings["board-highlight"]}
+            value={settings.board_highlight}
+            onChange={() => {
+              setSettings((prevState) => ({
+                ...prevState,
+                board_highlight: !prevState.board_highlight,
+              }));
+            }}
           />
-          Disable board highlight?
+          disable board highlight?
         </label>
         <label htmlFor="disable-verification">
           <input
             id="disable-verification"
             type="checkbox"
-            value={settings["verification"]}
+            value={settings.verification}
+            onChange={() => {
+              setSettings((prevState) => ({
+                ...prevState,
+                verification: !prevState.verification,
+              }));
+            }}
           />
-          Disable solving hints?
+          disable solving hints?
           <p id="minify-verification">
             This will disqualify you from leaderboard spots.
           </p>
@@ -108,29 +130,33 @@ const Options = ({ board, setBoard, isSolving, setisSolving}) => {
             id="difficulty-slider"
             type="range"
             min={0}
-            max={100}
-            step={5}
-            value={settings["difficulty"]}
+            max={80}
+            step={20}
+            value={settings.difficulty}
             onChange={(event) => {
               setSettings((prevState) => ({
                 ...prevState,
-                difficulty: event.target.value,
+                difficulty: parseInt(event.target.value),
               }));
             }}
           />
-          Puzzle difficulty:
+          puzzle difficulty:
           <p id="current-difficulty">
             {(() => {
-              const difficulty = settings["difficulty"]
-              if (difficulty < 20) return "beginner"
-              if (difficulty >= 20 && difficulty < 40) return "easy"
-              if (difficulty >= 40 && difficulty < 60) return "medium"
-              if (difficulty >= 60 && difficulty < 80) return "hard"
-              else {return "impossible"}
+              const difficulty = settings.difficulty;
+              if (difficulty === 0) return "beginner";
+              if (difficulty === 20) return "easy";
+              if (difficulty === 40) return "medium";
+              if (difficulty === 60) return "hard";
+              else {
+                return "impossible";
+              }
             })()}
           </p>
         </label>
-        <button id="generate-board">generate new puzzle</button>
+        <button id="generate-board" onClick={generatePuzzle}>
+          generate new puzzle
+        </button>
       </div>
 
       <div id="opt-solve" className="option-thirds">

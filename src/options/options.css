@@ -1,5 +1,5 @@
 :root {
-  --text-color: #000000;
+  --text-color: #f0ead6;
   --highlight: rgba(255, 215, 102, 0.8);
   --checkbox: #795656;
   --board-color: #d3d0cd;
@@ -40,6 +40,10 @@
   margin-right: 7.5%;
 }
 
+#generate-board {
+  background-color: #229091;
+}
+
 .buttons {
   --c: #229091;
   /* the color*/
@@ -77,7 +81,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: #f0ead6;
+    --text-color: #000000;
     --highlight: rgba(128, 108, 51, 0.8);
     --checkbox: #cdc3c3;
     --border-color: #a2938b;

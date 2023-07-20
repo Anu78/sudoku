@@ -16,12 +16,11 @@ export default function App() {
     [0, 0, 0, 0, 8, 0, 0, 7, 9],
   ]);
 
-  const [isSolving, setisSolving] = useState(false)
+  const [isSolving, setisSolving] = useState(false);
 
   return (
     <div className="container">
       <div id="leftThird" className="thirds">
-        {/* options div */}
         <Options
           isSolving={isSolving}
           setisSolving={setisSolving}
@@ -31,7 +30,6 @@ export default function App() {
       </div>
 
       <div id="midThird" className="thirds">
-        {/* sudoku board div */}
         <SudokuBoard
           isSolving={isSolving}
           setisSolving={setisSolving}
