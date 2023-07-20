@@ -118,9 +118,19 @@ const Options = ({ board, setBoard, isSolving, setisSolving}) => {
               }));
             }}
           />
-          Puzzle difficulty:{" "}
-          <p id="current-difficulty">{settings["difficulty"]}</p>
+          Puzzle difficulty:
+          <p id="current-difficulty">
+            {(() => {
+              const difficulty = settings["difficulty"]
+              if (difficulty < 20) return "beginner"
+              if (difficulty >= 20 && difficulty < 40) return "easy"
+              if (difficulty >= 40 && difficulty < 60) return "medium"
+              if (difficulty >= 60 && difficulty < 80) return "hard"
+              else {return "impossible"}
+            })()}
+          </p>
         </label>
+        <button id="generate-board">generate new puzzle</button>
       </div>
 
       <div id="opt-solve" className="option-thirds">
@@ -131,7 +141,7 @@ const Options = ({ board, setBoard, isSolving, setisSolving}) => {
           id="reset-btn"
           className="buttons"
         >
-          Reset
+          reset
         </button>
         <button
           disabled={isSolving}
@@ -139,7 +149,7 @@ const Options = ({ board, setBoard, isSolving, setisSolving}) => {
           id="solve-btn"
           className="buttons"
         >
-          Solve
+          solve
         </button>
       </div>
 

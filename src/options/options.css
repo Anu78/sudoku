@@ -53,7 +53,7 @@
   background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
   outline-offset: 0.1em;
   transition: background-size 0.4s, background-position 0s 0.4s;
-  font-size: 1.5em;
+  font-size: 1.3em;
   opacity: 1;
   transition: opacity 0.6s ease;
   cursor: pointer;
