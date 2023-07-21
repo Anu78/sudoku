@@ -1,0 +1,17 @@
+.stopwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.time-main {
+  font-size: 50px;
+}
+
+.time-sub {
+  font-size: 20px;
+  position: relative;
+  top: -15px;
+  left: 75px;
+}

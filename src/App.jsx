@@ -2,7 +2,8 @@ import "./App.css";
 import { useState } from "react";
 import Options from "./options/Options";
 import SudokuBoard from "./sudokuboard/SudokuBoard";
-import AppContext from "./AppContext"
+import AppContext from "./AppContext";
+import Profile from "./profile/Profile";
 
 export default function App() {
   const [board, setBoard] = useState([
@@ -18,14 +19,14 @@ export default function App() {
   ]);
 
   const [isSolving, setisSolving] = useState(false);
-    const [settings, setSettings] = useState({
-      difficulty: 50,
-      verification: false,
-      board_highlight: true,
-      zen_mode_solving: false,
-      theme: false,
-    });
-
+  const [settings, setSettings] = useState({
+    difficulty: 20,
+    verification: false,
+    board_highlight: true,
+    zen_mode_solving: false,
+    theme: false,
+  });
+  const [userSolving, setuserSolving] = useState(false);
   return (
     <AppContext.Provider
       value={{
@@ -33,19 +34,21 @@ export default function App() {
         setBoard,
         isSolving,
         setisSolving,
-        settings, setSettings
+        settings,
+        setSettings,
+        userSolving, setuserSolving
       }}
     >
       <div className="container">
         <div id="leftThird" className="thirds">
-          <Options/>
+          <Options />
         </div>
 
         <div id="midThird" className="thirds">
-          <SudokuBoard/>
+          <SudokuBoard />
         </div>
         <div id="rightThird" className="thirds">
-          {/* timer div */}
+          <Profile />
         </div>
       </div>
     </AppContext.Provider>
