@@ -1,0 +1,94 @@
+:root {
+    --footer-hover-color: rgba(99, 111, 112,0.1)
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#profile {
+    margin: 10%;
+    flex-basis: 20%;
+    display: flex;
+    justify-content: end;
+    flex-direction: row;
+    gap: 10%;
+}
+
+#login, #settings {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+#timer {
+    flex-basis: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer {
+    margin-bottom: 1%;
+    margin-right: 10%;
+    flex-basis: 10%;
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+    align-items:end;
+    justify-content: right;
+}
+
+.footer-half {
+    height: 25%;
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: center;
+    vertical-align: bottom;
+    cursor: pointer;
+    padding: 3%;
+    border-radius: 5px;
+}
+
+.footer-half:hover {
+    background-color: var(--footer-hover-color);
+}
+.icons {
+    vertical-align: bottom;
+}
+
+.side-text {
+    margin-left: 6%;
+
+}
+
+.profile-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    height: 25%;
+}
+
+#profile-animate {
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+@keyframes jumpAnimation {
+  0%, 100% {
+    transform: translateY(0); /* Initial and final position (no vertical movement) */
+  }
+  50% {
+    transform: translateY(-10px); /* Move the element up by 20 pixels at the midpoint */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --footer-hover-color: rgba(130, 146, 148, 0.1)
+  }
+}
+
+#profile-animate:hover {
+    animation: jumpAnimation 0.6s ease 2;
+}
