@@ -1,6 +1,6 @@
 import "./login.css"
 
-const LoginPopup = () => {
+const LoginModal = () => {
     return (
         <div>
             <h1>login test</h1>
@@ -8,4 +8,4 @@ const LoginPopup = () => {
     );
 }
  
-export default LoginPopup;
+export default LoginModal;
