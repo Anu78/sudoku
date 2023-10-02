@@ -49,11 +49,14 @@ That's it! You are ready to use the app. Enjoy! 😊
 ### Todo
 - [x] Dark mode css + row/col/grid highlight and auto switching
 - [x] Custom toast notifications
-- [] Error handling/return in solve function
-- [] Finish options form / extra customization
-- [] Add timer and user solving
-- [] Generate puzzles for user to solve
-- [] Zen mode
+- [x] Add timer and user solving
+- [ ] Error handling/return in solve function
+- [ ] Solving hints (color incorrect numbers red)
+- [ ] Generate puzzles for user to solve
+- [ ] Zen mode
+- [ ] Finish options form / extra customization
+- [ ] Keyboard shortcuts
+- [ ] UI refinement and unification
 
 ### Contributing
 We welcome contributions from anyone who wants to improve this app. Here are some guidelines on how to contribute:

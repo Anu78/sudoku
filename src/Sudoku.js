@@ -19,9 +19,10 @@ class Cell {
 
 export function validBoard(board) {
   class error {
-    constructor(type, index) {
+    constructor(type, index, pos) {
       this.type = type;
       this.index = index;
+      this.pos = pos
     }
   }
 
@@ -146,3 +147,4 @@ export async function solveBoard(board, boardCallback) {
   }
   possibleValues.unshift(cell);
 }
+

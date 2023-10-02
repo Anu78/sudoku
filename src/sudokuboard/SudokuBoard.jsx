@@ -1,6 +1,8 @@
 import "./sudokuboard.css";
+import "../Sudoku.js"
 import { useState, useContext } from "react";
 import AppContext from "../AppContext";
+import { validBoard } from "../Sudoku.js";
 
 const SudokuBoard = () => {
   const { isSolving, board, setBoard, settings } = useContext(AppContext);
@@ -15,6 +17,22 @@ const SudokuBoard = () => {
     const newBoard = [...board];
     newBoard[row][col] = parseInt(newValue, 10);
     setBoard(newBoard);
+
+    if (settings["verification"]) {
+      let boardError = validBoard(board);
+      if (boardError === true) {
+        // reset all invalid highlights
+      }
+      
+      else {
+        if (boardError.type === "row"){
+          // highlight invalid row
+        }
+        else {
+          // highlight invalid column
+        }
+      }
+    }
   };
 
   const handleFocus = (row, col) => {
