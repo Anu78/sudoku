@@ -36,7 +36,8 @@ export default function App() {
         setisSolving,
         settings,
         setSettings,
-        userSolving, setuserSolving
+        userSolving,
+        setuserSolving,
       }}
     >
       <div className="container">

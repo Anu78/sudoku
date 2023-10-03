@@ -10,15 +10,15 @@
 }
 
 #opt-heading {
-  flex-basis: 20%;
+  flex-basis: 30%;
 }
 
 #opt-form {
-  flex-basis: 70%;
-  font-size: 1.3em;
+  flex-basis: 50%;
+  font-size: 1.2em;
   display: flex;
   flex-direction: column;
-  gap: 10%;
+  gap: 5%;
 }
 
 #opt-solve {
@@ -79,6 +79,10 @@
   cursor: not-allowed;
 }
 
+input[type=range] {
+  width: 70%;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #000000;
@@ -91,8 +95,8 @@
 input[type="checkbox"] {
   position: relative;
   appearance: none;
-  width: 60px; /* Adjust the width */
-  height: 30px; /* Adjust the height */
+  width: 50px; /* Adjust the width */
+  height: 25px; /* Adjust the height */
   background: var(--board-color);
   border-radius: 30px; /* Adjust the border-radius */
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
@@ -107,8 +111,8 @@ input:checked[type="checkbox"] {
 input[type="checkbox"]::after {
   position: absolute;
   content: "";
-  width: 30px; /* Adjust the width */
-  height: 30px; /* Adjust the height */
+  width: 25px; /* Adjust the width */
+  height: 25px; /* Adjust the height */
   top: 0;
   left: 0;
   background: var(--checkbox);
@@ -120,4 +124,8 @@ input[type="checkbox"]::after {
 
 input:checked[type="checkbox"]::after {
   left: 50%;
+}
+
+.option-hint {
+  font-size: 65%;
 }

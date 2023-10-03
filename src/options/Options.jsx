@@ -9,7 +9,8 @@ const Options = () => {
   const resetBtn = {
     "--c": "#E95A49",
   };
-  const {isSolving, setisSolving, board, setBoard, settings, setSettings} = useContext(AppContext)
+  const { isSolving, setisSolving, board, setBoard, settings, setSettings } =
+    useContext(AppContext);
 
   function generatePuzzle() {
     alert("puzzle generated");
@@ -74,20 +75,6 @@ const Options = () => {
       </div>
 
       <div id="opt-form" className="option-thirds">
-        <label htmlFor="zen-mode-solving">
-          <input
-            id="zen-mode-solving"
-            type="checkbox"
-            value={settings.zen_mode_solving}
-            onChange={() => {
-              setSettings((prevState) => ({
-                ...prevState,
-                zen_mode_solving: !prevState.zen_mode_solving,
-              }));
-            }}
-          />
-          enable zen mode upon solve?
-        </label>
         <label htmlFor="disable-board-highlight">
           <input
             id="disable-board-highlight"
@@ -100,7 +87,7 @@ const Options = () => {
               }));
             }}
           />
-          disable board highlight?
+          <p className="option-sub"> disable board highlight? </p>
         </label>
         <label htmlFor="disable-verification">
           <input
@@ -114,9 +101,12 @@ const Options = () => {
               }));
             }}
           />
-          disable solving hints?
-          <p id="minify-verification">
-            This will disqualify you from leaderboard spots.
+          <p className="option-sub">
+            enable solving hints? <br />
+            <i className="option-hint">
+              {" "}
+              This will disqualify you from leaderboard spots.{" "}
+            </i>
           </p>
         </label>
         <label htmlFor="difficulty-slider">
@@ -134,18 +124,18 @@ const Options = () => {
               }));
             }}
           />
-          puzzle difficulty:
           <p id="current-difficulty">
-            {(() => {
-              const difficulty = settings.difficulty;
-              if (difficulty === 0) return "beginner";
-              if (difficulty === 20) return "easy";
-              if (difficulty === 40) return "medium";
-              if (difficulty === 60) return "hard";
-              else {
-                return "impossible";
-              }
-            })()}
+            {"puzzle difficulty: " +
+              (() => {
+                const difficulty = settings.difficulty;
+                if (difficulty === 0) return "beginner";
+                if (difficulty === 20) return "easy";
+                if (difficulty === 40) return "medium";
+                if (difficulty === 60) return "hard";
+                else {
+                  return "impossible";
+                }
+              })()}
           </p>
         </label>
         <button id="generate-board" onClick={generatePuzzle}>

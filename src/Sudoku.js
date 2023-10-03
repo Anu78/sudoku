@@ -17,18 +17,81 @@ class Cell {
   }
 }
 
+function getNthGrid(grid, n) {
+  const rowStart = Math.floor(n / 3) * 3;
+  const colStart = (n % 3) * 3;
+  const subgrid = [];
+
+  for (let i = rowStart; i < rowStart + 3; i++) {
+    const subgridRow = [];
+    for (let j = colStart; j < colStart + 3; j++) {
+      subgridRow.push(grid[i][j]);
+    }
+    subgrid.push(subgridRow);
+  }
+
+  return subgrid;
+}
+
+function validBoardHelper(error, grid) {
+  let unique = new Set();
+  switch (error.type) {
+    case "row":
+      for (var i = 0; i < grid.length; ++i) {
+        if (grid[error.index][i] === 0) {
+          continue;
+        } else if (unique.has(grid[error.index][i])) {
+          error.pos = i;
+          return [error.index, i];
+        }
+        unique.add(grid[error.index][i]);
+      }
+      break;
+    case "col":
+      for (i = 0; i < grid.length; ++i) {
+        if (grid[i][error.index] === 0) {
+          continue;
+        } else if (unique.has(grid[i][error.index])) {
+          return [i, error.index];
+        }
+
+        unique.add(grid[i][error.index]);
+      }
+      break;
+    case "grid":
+      var subgrid = getNthGrid(grid, error.index);
+      for (i = 0; i < subgrid.length; i++) {
+        for (var j = 0; j < subgrid[i].length; j++) {
+          if (subgrid[i][j] === 0) continue;
+          if (unique.has(subgrid[i][j])) {
+            error.type = "row";
+            error.pos = (error.index % 3) * 3 + j;
+            error.index = Math.floor(error.index / 3) * 3 + i;
+            return [error.index, error.pos];
+          }
+
+          unique.add(subgrid[i][j]);
+        }
+      }
+      break;
+  }
+}
+
 export function validBoard(board) {
-  class error {
-    constructor(type, index) {
+  class Error {
+    constructor(type, index, pos) {
       this.type = type;
       this.index = index;
+      this.pos = pos;
     }
   }
 
   for (let i = 0; i < board.length; i++) {
     var row = board[i].filter((element) => element != 0);
     let rowSet = new Set(row);
-    if (row.length !== rowSet.size) return new error("row", i + 1);
+
+    if (row.length !== rowSet.size)
+      return validBoardHelper(new Error("row", i), board);
   }
 
   for (let col = 0; col < 9; col++) {
@@ -40,7 +103,7 @@ export function validBoard(board) {
       if (value !== 0) {
         // Add this condition
         if (seenValues.has(value)) {
-          return new error("column", col + 1);
+          return validBoardHelper(new Error("col", col), board);
         }
         seenValues.add(value);
       }
@@ -60,11 +123,14 @@ export function validBoard(board) {
 
       const gridSet = new Set(grid);
       if (gridSet.size != grid.length)
-        return new error("grid", (rowOffset / 3) * 3 + colOffset / 3 + 1);
+        return validBoardHelper(
+          new Error("grid", (rowOffset / 3) * 3 + colOffset / 3),
+          board,
+        );
     }
   }
 
-  return true; // if no checks failed
+  return false; // no checks failed
 }
 
 function invertSet(originalSet) {
