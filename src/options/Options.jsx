@@ -124,17 +124,17 @@ const Options = () => {
             }}
           />
           <p id="current-difficulty">
-            
-            {"puzzle difficulty: " + (() => {
-              const difficulty = settings.difficulty;
-              if (difficulty === 0) return "beginner";
-              if (difficulty === 20) return "easy";
-              if (difficulty === 40) return "medium";
-              if (difficulty === 60) return "hard";
-              else {
-                return "impossible";
-              }
-            })()}
+            {"puzzle difficulty: " +
+              (() => {
+                const difficulty = settings.difficulty;
+                if (difficulty === 0) return "beginner";
+                if (difficulty === 20) return "easy";
+                if (difficulty === 40) return "medium";
+                if (difficulty === 60) return "hard";
+                else {
+                  return "impossible";
+                }
+              })()}
           </p>
         </label>
         <button id="generate-board" onClick={generatePuzzle}>

@@ -50,8 +50,8 @@ That's it! You are ready to use the app. Enjoy! 😊
 - [x] Dark mode css + row/col/grid highlight and auto switching
 - [x] Custom toast notifications
 - [x] Add timer and user solving
+- [x] Solving hints (color incorrect numbers red)
 - [ ] Error handling/return in solve function
-- [ ] Solving hints (color incorrect numbers red)
 - [ ] Generate puzzles for user to solve
 - [ ] Zen mode
 - [ ] Finish options form / extra customization

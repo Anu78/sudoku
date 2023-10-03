@@ -115,3 +115,7 @@ td.highlight input[type="number"] {
     --text-color: #f0ead6;
   }
 }
+
+.error-cell > input[type=number] {
+  color: red;
+}

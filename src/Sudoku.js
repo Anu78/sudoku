@@ -18,8 +18,8 @@ class Cell {
 }
 
 function getNthGrid(grid, n) {
-  const rowStart = (n % 3) * 3; // Starting row index of the subgrid
-  const colStart = (n % 3) * 3; // Starting column index of the subgrid
+  const rowStart = Math.floor(n / 3) * 3; 
+  const colStart = (n % 3) * 3;
   const subgrid = [];
 
   for (let i = rowStart; i < rowStart + 3; i++) {
@@ -42,7 +42,7 @@ function validBoardHelper(error, grid) {
           continue;
         } else if (unique.has(grid[error.index][i])) {
           error.pos = i;
-          return error;
+          return [error.index, i];
         }
         unique.add(grid[error.index][i]);
       }
@@ -52,10 +52,8 @@ function validBoardHelper(error, grid) {
         if (grid[i][error.index] === 0) {
           continue;
         } else if (unique.has(grid[i][error.index])) {
-          error.pos = i;
-          error.type = "row";
-          [error.pos, error.index] = [error.index, error.pos]
-          return error;
+
+          return [i, error.index];
         }
 
         unique.add(grid[i][error.index]);
@@ -63,14 +61,15 @@ function validBoardHelper(error, grid) {
       break;
     case "grid":
       var subgrid = getNthGrid(grid, error.index);
+      console.log(subgrid)
       for (i = 0; i < subgrid.length; i++) {
         for (var j = 0; j < subgrid[i].length; j++) {
           if (subgrid[i][j] === 0) continue;
           if (unique.has(subgrid[i][j])) {
             error.type = "row";
             error.pos = (error.index % 3) * 3 + j;
-            error.index = (error.index % 3) * 3 + i;
-            return error;
+            error.index = Math.floor(error.index / 3) * 3 + i;
+            return [error.index, error.pos];
           }
 
           unique.add(subgrid[i][j]);
