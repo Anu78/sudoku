@@ -18,10 +18,8 @@ class Cell {
 }
 
 function getNthGrid(grid, n) {
-
-  const rowStart = n * 3; // Starting row index of the subgrid
+  const rowStart = (n % 3) * 3; // Starting row index of the subgrid
   const colStart = (n % 3) * 3; // Starting column index of the subgrid
-
   const subgrid = [];
 
   for (let i = rowStart; i < rowStart + 3; i++) {
@@ -35,45 +33,51 @@ function getNthGrid(grid, n) {
   return subgrid;
 }
 
-function validBoardHelper(error, grid){
-  let unique = new Set()
-  switch(error.type){
+function validBoardHelper(error, grid) {
+  let unique = new Set();
+  switch (error.type) {
     case "row":
-      for(var i = 0; i < grid.length; ++i){
-          if (unique.has(grid[error.index][i])){
-            error.pos = i
-            return error
-          }
-          unique.add(grid[error.index][i])
+      for (var i = 0; i < grid.length; ++i) {
+        if (grid[error.index][i] === 0) {
+          continue;
+        } else if (unique.has(grid[error.index][i])) {
+          error.pos = i;
+          return error;
+        }
+        unique.add(grid[error.index][i]);
       }
-      break
+      break;
     case "col":
-      for(i = 0; i < grid.length; ++i){
-        if (unique.has(grid[i][error.index])){
-          error.pos = i
-          return error
+      for (i = 0; i < grid.length; ++i) {
+        if (grid[i][error.index] === 0) {
+          continue;
+        } else if (unique.has(grid[i][error.index])) {
+          error.pos = i;
+          error.type = "row";
+          [error.pos, error.index] = [error.index, error.pos]
+          return error;
         }
 
         unique.add(grid[i][error.index]);
       }
-      break
+      break;
     case "grid":
-      var subgrid = getNthGrid(grid, error.index)
-      console.log(subgrid);
+      var subgrid = getNthGrid(grid, error.index);
+      for (i = 0; i < subgrid.length; i++) {
+        for (var j = 0; j < subgrid[i].length; j++) {
+          if (subgrid[i][j] === 0) continue;
+          if (unique.has(subgrid[i][j])) {
+            error.type = "row";
+            error.pos = (error.index % 3) * 3 + j;
+            error.index = (error.index % 3) * 3 + i;
+            return error;
+          }
 
-      for(i = 0; i < subgrid.length; i++){
-        for(var j = 0; j < subgrid[i].length; j++){
-            if (unique.has(subgrid[i][j])) {
-              error.pos = error.index*3 + (error.index % 3) * 3 + i+j+2;
-              return error;
-            }
-
-            unique.add(subgrid[i][j]);
+          unique.add(subgrid[i][j]);
         }
       }
-      break
+      break;
   }
-
 }
 
 export function validBoard(board) {
@@ -88,10 +92,10 @@ export function validBoard(board) {
   for (let i = 0; i < board.length; i++) {
     var row = board[i].filter((element) => element != 0);
     let rowSet = new Set(row);
-    
-    if (row.length !== rowSet.size) return validBoardHelper(new Error("row", i), board);
-  }
 
+    if (row.length !== rowSet.size)
+      return validBoardHelper(new Error("row", i), board);
+  }
 
   for (let col = 0; col < 9; col++) {
     const seenValues = new Set();
@@ -122,13 +126,14 @@ export function validBoard(board) {
 
       const gridSet = new Set(grid);
       if (gridSet.size != grid.length)
-        return validBoardHelper(new Error("grid", (rowOffset / 3) * 3 + colOffset / 3), board);
+        return validBoardHelper(
+          new Error("grid", (rowOffset / 3) * 3 + colOffset / 3),
+          board
+        );
     }
   }
 
-  
-
-  return true; // no checks failed
+  return false; // no checks failed
 }
 
 function invertSet(originalSet) {
@@ -210,18 +215,3 @@ export async function solveBoard(board, boardCallback) {
   }
   possibleValues.unshift(cell);
 }
-
-
-const sudokuBoard = [
-  [5, 3, 0, 0, 7, 0, 0, 0, 0],
-  [6, 0, 0, 1, 9, 5, 0, 0, 0],
-  [0, 9, 6, 0, 0, 0, 0, 0, 0],
-  [8, 0, 0, 0, 6, 0, 0, 0, 3],
-  [4, 0, 0, 8, 0, 3, 0, 0, 1],
-  [7, 0, 0, 0, 2, 0, 0, 0, 6],
-  [0, 6, 0, 0, 0, 0, 2, 8, 0],
-  [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9],
-];
-
-console.log(validBoard(sudokuBoard));

@@ -20,19 +20,24 @@ const SudokuBoard = () => {
 
     if (settings["verification"]) {
       let boardError = validBoard(board);
-      if (boardError === true) {
+      if (!boardError) {
         // reset all invalid highlights
+        console.log(true)
       }
       
       else {
+        console.log(boardError)
         if (boardError.type === "row"){
           // highlight invalid row
         }
+        else if (boardError.type === "col"){
+          // 
+        }
         else {
-          // highlight invalid column
+          //
+        }
         }
       }
-    }
   };
 
   const handleFocus = (row, col) => {
