@@ -17,20 +17,81 @@ class Cell {
   }
 }
 
+function getNthGrid(grid, n) {
+
+  const rowStart = n * 3; // Starting row index of the subgrid
+  const colStart = (n % 3) * 3; // Starting column index of the subgrid
+
+  const subgrid = [];
+
+  for (let i = rowStart; i < rowStart + 3; i++) {
+    const subgridRow = [];
+    for (let j = colStart; j < colStart + 3; j++) {
+      subgridRow.push(grid[i][j]);
+    }
+    subgrid.push(subgridRow);
+  }
+
+  return subgrid;
+}
+
+function validBoardHelper(error, grid){
+  let unique = new Set()
+  switch(error.type){
+    case "row":
+      for(var i = 0; i < grid.length; ++i){
+          if (unique.has(grid[error.index][i])){
+            error.pos = i
+            return error
+          }
+          unique.add(grid[error.index][i])
+      }
+      break
+    case "col":
+      for(i = 0; i < grid.length; ++i){
+        if (unique.has(grid[i][error.index])){
+          error.pos = i
+          return error
+        }
+
+        unique.add(grid[i][error.index]);
+      }
+      break
+    case "grid":
+      var subgrid = getNthGrid(grid, error.index)
+      console.log(subgrid);
+
+      for(i = 0; i < subgrid.length; i++){
+        for(var j = 0; j < subgrid[i].length; j++){
+            if (unique.has(subgrid[i][j])) {
+              error.pos = error.index*3 + (error.index % 3) * 3 + i+j+2;
+              return error;
+            }
+
+            unique.add(subgrid[i][j]);
+        }
+      }
+      break
+  }
+
+}
+
 export function validBoard(board) {
-  class error {
+  class Error {
     constructor(type, index, pos) {
       this.type = type;
       this.index = index;
-      this.pos = pos
+      this.pos = pos;
     }
   }
 
   for (let i = 0; i < board.length; i++) {
     var row = board[i].filter((element) => element != 0);
     let rowSet = new Set(row);
-    if (row.length !== rowSet.size) return new error("row", i + 1);
+    
+    if (row.length !== rowSet.size) return validBoardHelper(new Error("row", i), board);
   }
+
 
   for (let col = 0; col < 9; col++) {
     const seenValues = new Set();
@@ -41,7 +102,7 @@ export function validBoard(board) {
       if (value !== 0) {
         // Add this condition
         if (seenValues.has(value)) {
-          return new error("column", col + 1);
+          return validBoardHelper(new Error("col", col), board);
         }
         seenValues.add(value);
       }
@@ -61,11 +122,13 @@ export function validBoard(board) {
 
       const gridSet = new Set(grid);
       if (gridSet.size != grid.length)
-        return new error("grid", (rowOffset / 3) * 3 + colOffset / 3 + 1);
+        return validBoardHelper(new Error("grid", (rowOffset / 3) * 3 + colOffset / 3), board);
     }
   }
 
-  return true; // if no checks failed
+  
+
+  return true; // no checks failed
 }
 
 function invertSet(originalSet) {
@@ -148,3 +211,17 @@ export async function solveBoard(board, boardCallback) {
   possibleValues.unshift(cell);
 }
 
+
+const sudokuBoard = [
+  [5, 3, 0, 0, 7, 0, 0, 0, 0],
+  [6, 0, 0, 1, 9, 5, 0, 0, 0],
+  [0, 9, 6, 0, 0, 0, 0, 0, 0],
+  [8, 0, 0, 0, 6, 0, 0, 0, 3],
+  [4, 0, 0, 8, 0, 3, 0, 0, 1],
+  [7, 0, 0, 0, 2, 0, 0, 0, 6],
+  [0, 6, 0, 0, 0, 0, 2, 8, 0],
+  [0, 0, 0, 4, 1, 9, 0, 0, 5],
+  [0, 0, 0, 0, 8, 0, 0, 7, 9],
+];
+
+console.log(validBoard(sudokuBoard));
