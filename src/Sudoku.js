@@ -18,7 +18,7 @@ class Cell {
 }
 
 function getNthGrid(grid, n) {
-  const rowStart = Math.floor(n / 3) * 3; 
+  const rowStart = Math.floor(n / 3) * 3;
   const colStart = (n % 3) * 3;
   const subgrid = [];
 
@@ -52,7 +52,6 @@ function validBoardHelper(error, grid) {
         if (grid[i][error.index] === 0) {
           continue;
         } else if (unique.has(grid[i][error.index])) {
-
           return [i, error.index];
         }
 
@@ -61,7 +60,6 @@ function validBoardHelper(error, grid) {
       break;
     case "grid":
       var subgrid = getNthGrid(grid, error.index);
-      console.log(subgrid)
       for (i = 0; i < subgrid.length; i++) {
         for (var j = 0; j < subgrid[i].length; j++) {
           if (subgrid[i][j] === 0) continue;
@@ -127,7 +125,7 @@ export function validBoard(board) {
       if (gridSet.size != grid.length)
         return validBoardHelper(
           new Error("grid", (rowOffset / 3) * 3 + colOffset / 3),
-          board
+          board,
         );
     }
   }

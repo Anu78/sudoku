@@ -22,9 +22,8 @@ const SudokuBoard = () => {
     if (settings["verification"]) {
       let boardError = validBoard(board);
       if (!boardError) {
-        seterrorPos([])
+        seterrorPos([]);
       } else {
-        console.log(boardError)
         seterrorPos(boardError);
       }
     }
@@ -68,7 +67,7 @@ const SudokuBoard = () => {
                 const isHighlighted = shouldHighlight(
                   rowIndex,
                   columnIndex,
-                  settings.board_highlight
+                  settings.board_highlight,
                 );
                 const isErrorCell =
                   errorPos &&

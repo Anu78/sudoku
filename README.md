@@ -1,10 +1,10 @@
 ## React Sudoku Solver
 
 ### About this project
+
 This react app aims to create an elegant and minimal sudoku solver that people can use to play the game and learn about solving strategies (in the future). This sudoku app is a part of a bigger project involving more similarly styled games.
 
 ### Getting Started
-
 
 To run this app, you will need to have [npm](https://www.npmjs.com/) and [node](https://nodejs.org/en/) installed on your machine. You can check if you have them by running the following commands in your terminal:
 
@@ -26,6 +26,7 @@ This will create a `dist` folder with the bundled files.
 ```bash
 npm install --global serve
 ```
+
 Install the serve package to host the app locally.
 
 Finally, you can serve the app using node by running the following command:
@@ -47,6 +48,7 @@ This will also serve the app on port 3000, but it will watch for changes in your
 That's it! You are ready to use the app. Enjoy! 😊
 
 ### Todo
+
 - [x] Dark mode css + row/col/grid highlight and auto switching
 - [x] Custom toast notifications
 - [x] Add timer and user solving
@@ -59,6 +61,7 @@ That's it! You are ready to use the app. Enjoy! 😊
 - [ ] UI refinement and unification
 
 ### Contributing
+
 We welcome contributions from anyone who wants to improve this app. Here are some guidelines on how to contribute:
 
 - Fork this repository and clone it to your local machine.

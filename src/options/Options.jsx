@@ -9,7 +9,8 @@ const Options = () => {
   const resetBtn = {
     "--c": "#E95A49",
   };
-  const {isSolving, setisSolving, board, setBoard, settings, setSettings} = useContext(AppContext)
+  const { isSolving, setisSolving, board, setBoard, settings, setSettings } =
+    useContext(AppContext);
 
   function generatePuzzle() {
     alert("puzzle generated");

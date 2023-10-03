@@ -104,7 +104,7 @@ td.highlight input[type="number"] {
   }
 }
 .animate-solve {
-    animation: fadeIn 0.5s east-in-out;
+  animation: fadeIn 0.5s east-in-out;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -116,6 +116,6 @@ td.highlight input[type="number"] {
   }
 }
 
-.error-cell > input[type=number] {
+.error-cell > input[type="number"] {
   color: red;
 }
