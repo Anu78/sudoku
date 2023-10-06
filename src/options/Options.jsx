@@ -3,8 +3,9 @@ import { resetBoard, solveBoard } from "../Sudoku.js";
 import { ToastContainer, toast } from "react-toastify";
 import { useHotkeys } from "react-hotkeys-hook";
 import "react-toastify/dist/ReactToastify.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AppContext from "../AppContext";
+import ShortcutOverlay from "./shortcuts-overlay/Overlay";
 
 const Options = () => {
   const resetBtn = {
@@ -12,6 +13,7 @@ const Options = () => {
   };
   const { isSolving, setisSolving, board, setBoard, settings, setSettings } =
     useContext(AppContext);
+  const [shortVisible, setshortVisible] = useState(false);
 
     // keyboard shortcuts
     useHotkeys("s", () => {
@@ -32,9 +34,26 @@ const Options = () => {
         verification: !prevState.verification,
       }));
     });
-
+    useHotkeys("t", () => {
+      console.log("theme switching coming soon");
+    });
+    useHotkeys("esc", () => {
+      if (isSolving) {
+        // maybe set the board to something unsolvable so that the algorithm fails
+      }
+      else if (setshortVisible) {
+        setshortVisible(false)
+      }
+    });
+    useHotkeys("g", () => {
+      generatePuzzle();
+    });
+    useHotkeys("shift+?", () => {
+      setshortVisible(!shortVisible);
+    });
+    
   function generatePuzzle() {
-    alert("puzzle generated");
+    console.log("puzzle generated");
   }
 
   function generateToast(type, msg) {
@@ -90,6 +109,9 @@ const Options = () => {
 
   return (
     <>
+      {shortVisible ?
+      <ShortcutOverlay/> : ""
+      }
       <div id="opt-heading" className="opt-thirds">
         <h1>options</h1>
         <p id="opt-sub-heading">update board settings below.</p>
