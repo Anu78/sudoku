@@ -27,6 +27,8 @@ export default function App() {
     theme: false,
   });
   const [userSolving, setuserSolving] = useState(false);
+
+
   return (
     <AppContext.Provider
       value={{
@@ -41,6 +43,7 @@ export default function App() {
       }}
     >
       <div className="container">
+        
         <div id="leftThird" className="thirds">
           <Options />
         </div>

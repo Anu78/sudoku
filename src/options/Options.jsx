@@ -1,6 +1,7 @@
 import "./options.css";
 import { resetBoard, solveBoard } from "../Sudoku.js";
 import { ToastContainer, toast } from "react-toastify";
+import { useHotkeys } from "react-hotkeys-hook";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import AppContext from "../AppContext";
@@ -11,6 +12,26 @@ const Options = () => {
   };
   const { isSolving, setisSolving, board, setBoard, settings, setSettings } =
     useContext(AppContext);
+
+    // keyboard shortcuts
+    useHotkeys("s", () => {
+      solve();
+    });
+    useHotkeys("r", () => {
+      reset();
+    });
+    useHotkeys("h", () => {
+      setSettings((prevState) => ({
+        ...prevState,
+        board_highlight: !prevState.board_highlight,
+      }));
+    });
+    useHotkeys("v", () => {
+      setSettings((prevState) => ({
+        ...prevState,
+        verification: !prevState.verification,
+      }));
+    });
 
   function generatePuzzle() {
     alert("puzzle generated");
@@ -80,6 +101,7 @@ const Options = () => {
             id="disable-board-highlight"
             type="checkbox"
             value={settings.board_highlight}
+            checked={settings.board_highlight}
             onChange={() => {
               setSettings((prevState) => ({
                 ...prevState,
@@ -87,13 +109,14 @@ const Options = () => {
               }));
             }}
           />
-          <p className="option-sub"> disable board highlight? </p>
+          <p className="option-sub"> board highlight? </p>
         </label>
         <label htmlFor="disable-verification">
           <input
             id="disable-verification"
             type="checkbox"
             value={settings.verification}
+            checked={settings.verification}
             onChange={() => {
               setSettings((prevState) => ({
                 ...prevState,
