@@ -129,3 +129,7 @@ input:checked[type="checkbox"]::after {
 .option-hint {
   font-size: 65%;
 }
+
+.option-sub {
+  font-size: 1rem;
+}

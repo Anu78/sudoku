@@ -125,7 +125,7 @@ export function validBoard(board) {
       if (gridSet.size != grid.length)
         return validBoardHelper(
           new Error("grid", (rowOffset / 3) * 3 + colOffset / 3),
-          board,
+          board
         );
     }
   }
@@ -185,30 +185,61 @@ function evalBoardState(board) {
   return possibleValues;
 }
 
-async function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+export function solveBoard(board, boardCallback) {
+  let changes = [];
+
+  solveHelper(board, boardCallback, changes);
+
+  console.log(changes);
+  return changes;
 }
 
-export async function solveBoard(board, boardCallback) {
+export function solveHelper(board, boardCallback, changes) {
   let possibleValues = evalBoardState(board);
-  let ms = 180;
 
-  if (possibleValues.length === 0) return board; // no solution
+  if (possibleValues.length === 0) return true; // Return the list of changes, not board
 
   const cell = possibleValues.shift();
-
   const [row, col] = cell.index;
 
+  const originalValue = board[row][col]; // Store the original value for backtracking
+
   for (let num of cell.valueSet) {
-    await delay(ms);
     board[row][col] = num;
+    changes.push({ row: row, col: col, val: num });
     boardCallback(board);
-    const result = solveBoard(board, boardCallback);
+    const result = solveHelper(board, boardCallback, changes); // Pass changes array as an argument
     if (result) {
-      return result;
+      return true;
     }
-    board[row][col] = 0;
-    boardCallback(board);
   }
+
+  // Backtrack to the original value
+  board[row][col] = originalValue;
+  changes.push({ row: row, col: col, val: originalValue });
+  boardCallback(board);
+
   possibleValues.unshift(cell);
+
+  return false
 }
+
+let board = [
+  [5, 3, 0, 0, 7, 0, 0, 0, 0],
+  [6, 0, 0, 1, 9, 5, 0, 0, 0],
+  [0, 9, 8, 0, 0, 0, 0, 6, 0],
+  [8, 0, 0, 0, 6, 0, 0, 0, 3],
+  [4, 0, 0, 8, 0, 3, 0, 0, 1],
+  [7, 0, 0, 0, 2, 0, 0, 0, 6],
+  [0, 6, 0, 0, 0, 0, 2, 8, 0],
+  [0, 0, 0, 4, 1, 9, 0, 0, 5],
+  [0, 0, 0, 0, 8, 0, 0, 7, 9],
+];
+
+let result = solveBoard(board, function () {});
+console.log(result, "\n", "Steps taken: " + result.length)
+
+
+// export function generateBoard(difficulty, unique = true){
+  
+// }
