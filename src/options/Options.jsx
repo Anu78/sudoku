@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext, useState } from "react";
 import AppContext from "../AppContext";
 import ShortcutOverlay from "./shortcuts-overlay/Overlay";
+import SettingsOverlay from "./settings-overlay/Overlay";
 
 const Options = () => {
   const resetBtn = {
@@ -14,6 +15,8 @@ const Options = () => {
   const { isSolving, setisSolving, board, setBoard, settings, setSettings } =
     useContext(AppContext);
   const [shortVisible, setshortVisible] = useState(false);
+  const [settingsVisible, setsettingsVisible] = useState(false);
+  const [loginVisible, setloginVisible] = useState(false);
 
     // keyboard shortcuts
     useHotkeys("s", () => {
@@ -109,6 +112,12 @@ const Options = () => {
 
   return (
     <>
+      {shortVisible ?
+      <ShortcutOverlay/> : ""
+      }
+      {shortVisible ?
+      <ShortcutOverlay/> : ""
+      }
       {shortVisible ?
       <ShortcutOverlay/> : ""
       }
