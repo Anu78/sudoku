@@ -47,9 +47,7 @@ const Options = () => {
 
     // Use try-catch block to handle errors
     try {
-      const solvedBoard = await solveBoard(board, midUpdateBoard);
-      const newBoard = [...solvedBoard];
-      setBoard(newBoard);
+      solveBoard(board, midUpdateBoard);
       generateToast("success", "The board was solved!");
     } catch (error) {
       // Handle any errors from solveBoard
@@ -70,7 +68,7 @@ const Options = () => {
   return (
     <>
       <div id="opt-heading" className="opt-thirds">
-        <h1>options</h1>
+        <h2>options</h2>
         <p id="opt-sub-heading">update board settings below.</p>
       </div>
 
@@ -80,6 +78,7 @@ const Options = () => {
             id="disable-board-highlight"
             type="checkbox"
             value={settings.board_highlight}
+            checked={settings.board_highlight}
             onChange={() => {
               setSettings((prevState) => ({
                 ...prevState,
@@ -87,13 +86,13 @@ const Options = () => {
               }));
             }}
           />
-          <p className="option-sub"> disable board highlight? </p>
+          <p className="option-sub">board highlight? </p>
         </label>
         <label htmlFor="disable-verification">
           <input
             id="disable-verification"
             type="checkbox"
-            value={settings.verification}
+            value={!settings.verification}
             onChange={() => {
               setSettings((prevState) => ({
                 ...prevState,
@@ -124,7 +123,7 @@ const Options = () => {
               }));
             }}
           />
-          <p id="current-difficulty">
+          <p id="current-difficulty" className="option-sub">
             {"puzzle difficulty: " +
               (() => {
                 const difficulty = settings.difficulty;
