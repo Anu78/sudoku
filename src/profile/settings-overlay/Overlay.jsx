@@ -2,6 +2,10 @@ import { useState } from "react";
 import "./overlay.css";
 import General from "./settings/general/General";
 import Style from "./settings/style/Style";
+import Account from "./settings/account/Account";
+import Feedback from "./settings/feedback/Feedback"
+import Stats from "./settings/stats/stats";
+import Solver from "./settings/solver/Solver";
 
 const SettingsOverlay = () => {
   const [selectedCat, setselectedCat] = useState("general");
@@ -57,14 +61,6 @@ const SettingsOverlay = () => {
           <li
             onClick={handleCatChange}
             className={`cat-list ${
-              selectedCat === "keyboard" ? "selected" : ""
-            }`}
-          >
-            keyboard
-          </li>
-          <li
-            onClick={handleCatChange}
-            className={`cat-list ${
               selectedCat === "feedback" ? "selected" : ""
             }`}
           >
@@ -75,11 +71,10 @@ const SettingsOverlay = () => {
       <div className="options">
         {selectedCat === "general" && <General />}
         {selectedCat === "style" && <Style />}
-        {selectedCat === "solver" && <Style />}
-        {selectedCat === "account" && <Style />}
-        {selectedCat === "stats" && <Style />}
-        {selectedCat === "keyboard" && <Style />}
-        {selectedCat === "feedback" && <Style />}
+        {selectedCat === "solver" && <Solver />}
+        {selectedCat === "account" && <Account />}
+        {selectedCat === "stats" && <Stats />}
+        {selectedCat === "feedback" && <Feedback />}
       </div>
     </div>
   );
