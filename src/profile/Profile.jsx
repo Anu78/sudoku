@@ -3,13 +3,18 @@ import { AiFillGithub } from "react-icons/ai";
 import { BsFillPaletteFill, BsFillPersonFill } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import Timer from "../stopwatch/stopwatch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AppContext from "../AppContext";
+import SettingsOverlay from "./settings-overlay/Overlay";
 
 const Profile = () => {
+  const [settingsVisible, setsettingsVisible] = useState(false);
+
   function loginPopup() {}
 
-  function settingsModal() {}
+  function settingsModal() {
+    setsettingsVisible(!settingsVisible);
+  }
 
   function redirectGithub() {
     let url = "https://github.com/Anu78/sudoku-solver";
@@ -20,6 +25,7 @@ const Profile = () => {
   const { userSolving } = useContext(AppContext);
   return (
     <div id="container">
+      {settingsVisible ? <SettingsOverlay /> : ""}
       <div id="profile">
         <div id="settings">
           <span

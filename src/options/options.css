@@ -50,13 +50,16 @@
   width: 15vh;
   box-shadow: 0 0 0 0.1em inset var(--c);
   --_g: linear-gradient(var(--c) 0 0) no-repeat;
-  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+  background:
+    var(--_g) calc(var(--_p, 0%) - 100%) 0%,
     var(--_g) calc(200% - var(--_p, 0%)) 0%,
     var(--_g) calc(var(--_p, 0%) - 100%) 100%,
     var(--_g) calc(200% - var(--_p, 0%)) 100%;
   background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
   outline-offset: 0.1em;
-  transition: background-size 0.4s, background-position 0s 0.4s;
+  transition:
+    background-size 0.4s,
+    background-position 0s 0.4s;
   font-size: 1.3em;
   opacity: 1;
   transition: opacity 0.6s ease;
@@ -65,7 +68,9 @@
 
 .buttons:hover:not(:disabled) {
   --_p: 100%;
-  transition: background-position 0.4s, background-size 0s;
+  transition:
+    background-position 0.4s,
+    background-size 0s;
 }
 
 .buttons:active:not(:disabled) {
@@ -79,7 +84,7 @@
   cursor: not-allowed;
 }
 
-input[type=range] {
+input[type="range"] {
   width: 70%;
 }
 

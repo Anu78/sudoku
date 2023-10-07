@@ -1,7 +1,5 @@
 const LoginOverlay = () => {
-    return (
-        <div></div>
-    );
-}
- 
+  return <div></div>;
+};
+
 export default LoginOverlay;

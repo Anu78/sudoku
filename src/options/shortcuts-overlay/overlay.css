@@ -1,47 +1,48 @@
 .shortcut-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40%;
-    height: 40%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(32, 30, 30, 0.95);
-    animation: fadeIn 0.15s ease-in;
-    display: flex;
-    gap: 1%;
-    flex-direction: column;
-    padding: 1%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(32, 30, 30, 0.95);
+  animation: fadeIn 0.15s ease-in;
+  display: flex;
+  gap: 1%;
+  flex-direction: column;
+  padding: 1%;
 }
-ul, li {
-    list-style-type: none;
+ul,
+li {
+  list-style-type: none;
 }
 
 .key-items {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 2%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 5%;
+  height: 100%;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .overlayHeading {
-    width:100%;
-    text-align: center;
-    margin-bottom: 2%;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2%;
 }
 
 .keys {
-    background: gray;
-    font-weight: bold;
-    border-radius: 2px;
-    padding:2%;
+  background: gray;
+  font-weight: bold;
+  border-radius: 2px;
+  padding: 2%;
 }
