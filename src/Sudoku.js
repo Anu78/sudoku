@@ -33,6 +33,20 @@ function getNthGrid(grid, n) {
   return subgrid;
 }
 
+export function boardToString(board) {
+  let res = "";
+  for (var i in board) {
+    for (var j in i) {
+      if (board[i][j] === 0) {
+        res += ".";
+      } else {
+        res += board[i][j].toString();
+      }
+    }
+  }
+  return res;
+}
+
 function validBoardHelper(error, grid) {
   let unique = new Set();
   switch (error.type) {
@@ -196,6 +210,7 @@ export function solveBoard(board, boardCallback) {
 
 export function solveHelper(board, boardCallback, changes) {
   let possibleValues = evalBoardState(board);
+  let ms = 100;
 
   if (possibleValues.length === 0) return true; // Return the list of changes, not board
 
@@ -223,23 +238,3 @@ export function solveHelper(board, boardCallback, changes) {
 
   return false
 }
-
-let board = [
-  [5, 3, 0, 0, 7, 0, 0, 0, 0],
-  [6, 0, 0, 1, 9, 5, 0, 0, 0],
-  [0, 9, 8, 0, 0, 0, 0, 6, 0],
-  [8, 0, 0, 0, 6, 0, 0, 0, 3],
-  [4, 0, 0, 8, 0, 3, 0, 0, 1],
-  [7, 0, 0, 0, 2, 0, 0, 0, 6],
-  [0, 6, 0, 0, 0, 0, 2, 8, 0],
-  [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9],
-];
-
-let result = solveBoard(board, function () {});
-console.log(result, "\n", "Steps taken: " + result.length)
-
-
-// export function generateBoard(difficulty, unique = true){
-  
-// }

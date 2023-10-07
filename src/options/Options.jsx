@@ -1,19 +1,81 @@
 import "./options.css";
 import { resetBoard, solveBoard } from "../Sudoku.js";
 import { ToastContainer, toast } from "react-toastify";
+import { useHotkeys } from "react-hotkeys-hook";
 import "react-toastify/dist/ReactToastify.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AppContext from "../AppContext";
+import ShortcutOverlay from "./shortcuts-overlay/Overlay";
 
 const Options = () => {
+  const BackgroundDim = () => {
+    const dimStyle = {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.5)", // Gray background with 50% opacity
+      zIndex: 5, // Ensures the dim overlay is on top of other content
+    };
+
+    return <div onClick={() => {
+      setshortVisible(false)
+    }} style={dimStyle}></div>;
+  };
+  
   const resetBtn = {
     "--c": "#E95A49",
   };
   const { isSolving, setisSolving, board, setBoard, settings, setSettings } =
     useContext(AppContext);
+  const [shortVisible, setshortVisible] = useState(false);
+
+  // keyboard shortcuts
+  useHotkeys("s", () => {
+    solve();
+  });
+  useHotkeys("r", () => {
+    if(isEmpty(board)){
+      return;
+    }
+    reset();
+  });
+  useHotkeys("d", () => {
+    setSettings((prevState) => ({
+      ...prevState,
+      difficulty: (settings.difficulty+20) % 100,
+    }));
+    console.log(settings.difficulty)
+  });
+  useHotkeys("h", () => {
+    setSettings((prevState) => ({
+      ...prevState,
+      board_highlight: !prevState.board_highlight,
+    }));
+  });
+  useHotkeys("v", () => {
+    setSettings((prevState) => ({
+      ...prevState,
+      verification: !prevState.verification,
+    }));
+  });
+  useHotkeys("esc", () => {
+    if (isSolving) {
+      // maybe set the board to something unsolvable so that the algorithm fails
+    } else if (setshortVisible) {
+      setshortVisible(false);
+    }
+  });
+  useHotkeys("g", () => {
+    generatePuzzle();
+  });
+  useHotkeys("shift+?", () => {
+    setshortVisible(!shortVisible);
+  });
 
   function generatePuzzle() {
-    alert("puzzle generated");
+    console.log("puzzle generated");
   }
 
   function generateToast(type, msg) {
@@ -42,9 +104,24 @@ const Options = () => {
     setBoard(newBoard);
   }
 
-  async function solve() {
-    setisSolving(true);
+  function isEmpty(board) {
+    for (var i = 0; i < board.length; i++) {
+      for (var j = 0; j < board.length; j++) {
+        if (board[i][j] !== 0) {
+          return false;
+        }
+      }
+    }
 
+    return true;
+  }
+
+  async function solve() {
+    if (isEmpty(board)) {
+      generateToast("error", "you cannot solve an empty board");
+      return;
+    }
+    setisSolving(true);
     // Use try-catch block to handle errors
     try {
       solveBoard(board, midUpdateBoard);
@@ -67,6 +144,8 @@ const Options = () => {
 
   return (
     <>
+      {shortVisible ? <ShortcutOverlay /> : ""}
+      {shortVisible ? <BackgroundDim /> : ""}
       <div id="opt-heading" className="opt-thirds">
         <h2>options</h2>
         <p id="opt-sub-heading">update board settings below.</p>
@@ -92,7 +171,8 @@ const Options = () => {
           <input
             id="disable-verification"
             type="checkbox"
-            value={!settings.verification}
+            value={settings.verification}
+            checked={settings.verification}
             onChange={() => {
               setSettings((prevState) => ({
                 ...prevState,
@@ -103,8 +183,7 @@ const Options = () => {
           <p className="option-sub">
             enable solving hints? <br />
             <i className="option-hint">
-              {" "}
-              This will disqualify you from leaderboard spots.{" "}
+              this will disqualify you from leaderboard spots.
             </i>
           </p>
         </label>
@@ -123,8 +202,8 @@ const Options = () => {
               }));
             }}
           />
-          <p id="current-difficulty" className="option-sub">
-            {"puzzle difficulty: " +
+          <p id="current-difficulty">
+            {
               (() => {
                 const difficulty = settings.difficulty;
                 if (difficulty === 0) return "beginner";

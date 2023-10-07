@@ -1,0 +1,52 @@
+.shortcut-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(77, 56, 56);
+  animation: fadeIn 0.15s ease-in;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  z-index: 10;
+  border-radius: 2%;
+}
+ul,
+li {
+  list-style-type: none;
+}
+
+.key-items {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  column-count: 2;
+  gap: 1rem;
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlayHeading {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.keys {
+  background: gray;
+  font-weight: bold;
+  border-radius: 2px;
+  padding: 2%;
+}

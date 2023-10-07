@@ -2,14 +2,44 @@ import "./profile.css";
 import { AiFillGithub } from "react-icons/ai";
 import { BsFillPaletteFill, BsFillPersonFill } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
+import { useHotkeys } from "react-hotkeys-hook";
 import Timer from "../stopwatch/stopwatch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AppContext from "../AppContext";
-
+import SettingsOverlay from "./settings-overlay/Overlay";
+ 
 const Profile = () => {
-  function loginPopup() {}
+  const [settingsVisible, setsettingsVisible] = useState(false);
 
-  function settingsModal() {}
+  function loginPopup(){
+    console.log("loginpopup called")
+  }
+
+  useHotkeys("esc", () => {
+    if (settingsVisible) {
+      settingsModal();
+    }
+  });
+
+  
+const BackgroundDim = () => {
+  
+  const dimStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Gray background with 50% opacity
+    zIndex: 5, // Ensures the dim overlay is on top of other content
+  };
+
+  return <div onClick={settingsModal} style={dimStyle}></div>;
+};
+
+  function settingsModal() {
+    setsettingsVisible(!settingsVisible);
+  }
 
   function redirectGithub() {
     let url = "https://github.com/Anu78/sudoku-solver";
@@ -20,6 +50,8 @@ const Profile = () => {
   const { userSolving } = useContext(AppContext);
   return (
     <div id="container">
+      {settingsVisible ? <SettingsOverlay /> : ""}
+      {settingsVisible ? <BackgroundDim/> : ""}
       <div id="profile">
         <div id="settings">
           <span
