@@ -17,25 +17,57 @@ const SettingsOverlay = () => {
       <div className="cats-div">
         <h3 id="settings-hd">settings</h3>
         <ul className="cat-container">
-          <li onClick={handleCatChange} className="cat-list">
+          <li
+            onClick={handleCatChange}
+            className={`cat-list ${
+              selectedCat === "general" ? "selected" : ""
+            }`}
+          >
             general
           </li>
-          <li onClick={handleCatChange} className="cat-list">
+          <li
+            onClick={handleCatChange}
+            className={`cat-list ${selectedCat === "style" ? "selected" : ""}`}
+          >
             style
           </li>
-          <li onClick={handleCatChange} className="cat-list">
+          <li
+            onClick={handleCatChange}
+            className={`cat-list ${selectedCat === "solver" ? "selected" : ""}`}
+          >
             solver
           </li>
-          <li onClick={handleCatChange} className="cat-list">
+          <li
+            onClick={handleCatChange}
+            className={`cat-list ${
+              selectedCat === "account" ? "selected" : ""
+            }`}
+          >
             account
           </li>
-          <li onClick={handleCatChange} className="cat-list">
+
+          <li
+            onClick={handleCatChange}
+            className={`cat-list ${
+              selectedCat === "stats" ? "selected" : ""
+            }`}
+          >
             stats
           </li>
-          <li onClick={handleCatChange} className="cat-list">
+          <li
+            onClick={handleCatChange}
+            className={`cat-list ${
+              selectedCat === "keyboard" ? "selected" : ""
+            }`}
+          >
             keyboard
           </li>
-          <li onClick={handleCatChange} className="cat-list">
+          <li
+            onClick={handleCatChange}
+            className={`cat-list ${
+              selectedCat === "feedback" ? "selected" : ""
+            }`}
+          >
             feedback
           </li>
         </ul>

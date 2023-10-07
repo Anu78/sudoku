@@ -24,6 +24,9 @@ const ShortcutOverlay = () => {
           <span className="keys">v</span> - toggle board verification
         </li>
         <li>
+          <span className="keys">d</span> - change difficulty
+        </li>
+        <li>
           <span className="keys">esc</span> - interrupt solving
         </li>
       </ul>

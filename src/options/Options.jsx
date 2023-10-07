@@ -8,6 +8,22 @@ import AppContext from "../AppContext";
 import ShortcutOverlay from "./shortcuts-overlay/Overlay";
 
 const Options = () => {
+  const BackgroundDim = () => {
+    const dimStyle = {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.5)", // Gray background with 50% opacity
+      zIndex: 5, // Ensures the dim overlay is on top of other content
+    };
+
+    return <div onClick={() => {
+      setshortVisible(false)
+    }} style={dimStyle}></div>;
+  };
+  
   const resetBtn = {
     "--c": "#E95A49",
   };
@@ -20,7 +36,17 @@ const Options = () => {
     solve();
   });
   useHotkeys("r", () => {
+    if(isEmpty(board)){
+      return;
+    }
     reset();
+  });
+  useHotkeys("d", () => {
+    setSettings((prevState) => ({
+      ...prevState,
+      difficulty: (settings.difficulty+20) % 100,
+    }));
+    console.log(settings.difficulty)
   });
   useHotkeys("h", () => {
     setSettings((prevState) => ({
@@ -121,6 +147,7 @@ const Options = () => {
   return (
     <>
       {shortVisible ? <ShortcutOverlay /> : ""}
+      {shortVisible ? <BackgroundDim /> : ""}
       <div id="opt-heading" className="opt-thirds">
         <h1>options</h1>
         <p id="opt-sub-heading">update board settings below.</p>
@@ -178,7 +205,7 @@ const Options = () => {
             }}
           />
           <p id="current-difficulty">
-            {"puzzle difficulty: " +
+            {
               (() => {
                 const difficulty = settings.difficulty;
                 if (difficulty === 0) return "beginner";
