@@ -33,6 +33,20 @@ function getNthGrid(grid, n) {
   return subgrid;
 }
 
+export function boardToString(board) {
+  let res = "";
+  for (var i in board) {
+    for (var j in i) {
+      if (board[i][j] === 0) {
+        res += ".";
+      } else {
+        res += board[i][j].toString();
+      }
+    }
+  }
+  return res;
+}
+
 function validBoardHelper(error, grid) {
   let unique = new Set();
   switch (error.type) {
@@ -125,7 +139,7 @@ export function validBoard(board) {
       if (gridSet.size != grid.length)
         return validBoardHelper(
           new Error("grid", (rowOffset / 3) * 3 + colOffset / 3),
-          board,
+          board
         );
     }
   }
