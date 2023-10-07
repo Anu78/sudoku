@@ -124,9 +124,7 @@ const Options = () => {
     setisSolving(true);
     // Use try-catch block to handle errors
     try {
-      const solvedBoard = await solveBoard(board, midUpdateBoard);
-      const newBoard = [...solvedBoard];
-      setBoard(newBoard);
+      solveBoard(board, midUpdateBoard);
       generateToast("success", "The board was solved!");
     } catch (error) {
       // Handle any errors from solveBoard
@@ -149,7 +147,7 @@ const Options = () => {
       {shortVisible ? <ShortcutOverlay /> : ""}
       {shortVisible ? <BackgroundDim /> : ""}
       <div id="opt-heading" className="opt-thirds">
-        <h1>options</h1>
+        <h2>options</h2>
         <p id="opt-sub-heading">update board settings below.</p>
       </div>
 
@@ -167,7 +165,7 @@ const Options = () => {
               }));
             }}
           />
-          <p className="option-sub"> board highlight? </p>
+          <p className="option-sub">board highlight? </p>
         </label>
         <label htmlFor="disable-verification">
           <input
