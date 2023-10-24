@@ -3,7 +3,7 @@ import "./overlay.css";
 import General from "./settings/general/General";
 import Style from "./settings/style/Style";
 import Account from "./settings/account/Account";
-import Feedback from "./settings/feedback/Feedback"
+import Feedback from "./settings/feedback/Feedback";
 import Stats from "./settings/stats/stats";
 import Solver from "./settings/solver/Solver";
 
@@ -52,9 +52,7 @@ const SettingsOverlay = () => {
 
           <li
             onClick={handleCatChange}
-            className={`cat-list ${
-              selectedCat === "stats" ? "selected" : ""
-            }`}
+            className={`cat-list ${selectedCat === "stats" ? "selected" : ""}`}
           >
             stats
           </li>

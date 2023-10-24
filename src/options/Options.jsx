@@ -19,11 +19,16 @@ const Options = () => {
       zIndex: 5, // Ensures the dim overlay is on top of other content
     };
 
-    return <div onClick={() => {
-      setshortVisible(false)
-    }} style={dimStyle}></div>;
+    return (
+      <div
+        onClick={() => {
+          setshortVisible(false);
+        }}
+        style={dimStyle}
+      ></div>
+    );
   };
-  
+
   const resetBtn = {
     "--c": "#E95A49",
   };
@@ -36,7 +41,7 @@ const Options = () => {
     solve();
   });
   useHotkeys("r", () => {
-    if(isEmpty(board)){
+    if (isEmpty(board)) {
       return;
     }
     reset();
@@ -44,9 +49,9 @@ const Options = () => {
   useHotkeys("d", () => {
     setSettings((prevState) => ({
       ...prevState,
-      difficulty: (settings.difficulty+20) % 100,
+      difficulty: (settings.difficulty + 20) % 100,
     }));
-    console.log(settings.difficulty)
+    console.log(settings.difficulty);
   });
   useHotkeys("h", () => {
     setSettings((prevState) => ({
@@ -203,17 +208,16 @@ const Options = () => {
             }}
           />
           <p id="current-difficulty">
-            {
-              (() => {
-                const difficulty = settings.difficulty;
-                if (difficulty === 0) return "beginner";
-                if (difficulty === 20) return "easy";
-                if (difficulty === 40) return "medium";
-                if (difficulty === 60) return "hard";
-                else {
-                  return "impossible";
-                }
-              })()}
+            {(() => {
+              const difficulty = settings.difficulty;
+              if (difficulty === 0) return "beginner";
+              if (difficulty === 20) return "easy";
+              if (difficulty === 40) return "medium";
+              if (difficulty === 60) return "hard";
+              else {
+                return "impossible";
+              }
+            })()}
           </p>
         </label>
         <button id="generate-board" onClick={generatePuzzle}>

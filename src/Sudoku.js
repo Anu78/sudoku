@@ -139,7 +139,7 @@ export function validBoard(board) {
       if (gridSet.size != grid.length)
         return validBoardHelper(
           new Error("grid", (rowOffset / 3) * 3 + colOffset / 3),
-          board
+          board,
         );
     }
   }
@@ -236,5 +236,5 @@ export function solveHelper(board, boardCallback, changes) {
 
   possibleValues.unshift(cell);
 
-  return false
+  return false;
 }
