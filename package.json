@@ -1,6 +1,6 @@
 {
   "name": "sudoku-solver",
-  "homepage": "https://anu78.github.io/sudoku",
+  "homepage": "https://anuraagw.me/sudoku",
   "private": true,
   "version": "0.0.0",
   "type": "module",
